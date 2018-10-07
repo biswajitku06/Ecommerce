@@ -102,8 +102,11 @@ $maincategories = Controller::categories();
                                 <ul role="menu" class="sub-menu">
                                     @if(isset($maincategories))
                                         @foreach($maincategories as $maincat)
-                                            <li><a href="{{route('productlist',$maincat->url)}}">{{$maincat->name}}</a>
-                                            </li>
+                                            @if($maincat->status=="2")
+                                                <li>
+                                                    <a href="{{route('productlist',$maincat->url)}}">{{$maincat->name}}</a>
+                                                </li>
+                                            @endif
                                         @endforeach
                                     @endif
                                 </ul>

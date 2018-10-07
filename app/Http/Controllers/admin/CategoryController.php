@@ -14,10 +14,17 @@ class CategoryController extends Controller
             $data=$request->all();
             $category=new Category;
 
+            if(empty($data['status'])){
+                $status=0;
+            }
+            else{
+                $status=2;
+            }
             $category->name=$data['cat_name'];
             $category->parent_id=$data['parent_id'];
             $category->description=$data['description'];
             $category->url=$data['url'];
+            $category->status=$status;
             $category->save();
             return redirect()->back()->with(['success'=>'Category Insert Successfully']);
         }
@@ -34,11 +41,18 @@ class CategoryController extends Controller
     public function editCategory(Request $request,$id=null)
     {
         if($request->isMethod('post')){
+
+            if(empty($request->status)){
+                $status=0;
+            }else{
+                $status=2;
+            }
             $data=[
                 'name'=>$request->cat_name,
                 'parent_id'=>$request->parent_id,
                 'description'=>$request->description,
-                'url'=>$request->url
+                'url'=>$request->url,
+                'status'=>$status
             ];
             $update=Category::where('id','=',$id)->update($data);
             if($update)

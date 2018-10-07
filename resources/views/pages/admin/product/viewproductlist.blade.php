@@ -51,16 +51,19 @@
                                             @endif
                                         </td>
                                         <td class="center"><a href="#myModal{{$products->id}}" data-toggle="modal"
-                                                              class="btn btn-success btn-mini">View</a> <a
+                                                              class="btn btn-success btn-mini" title="view produdct list">View</a>
+                                            <a href="{{route('addProductimage',$products->id)}}"
+                                               class="btn btn-info btn-mini" title="add image">Add</a>
+                                            <a
                                                     href="{{route('editProduct',$products->id)}}"
-                                                    class="btn btn-primary btn-mini">Edit</a>
+                                                    class="btn btn-primary btn-mini" title="edit product">Edit</a>
 
                                             <a href="{{route('addProductAttribute',$products->id)}}"
-                                                    class="btn btn-success btn-mini">Add</a>
+                                                    class="btn btn-success btn-mini" title="add product">Add</a>
                                             <a rel="{{$products->id}}" rel1="delete-product"
 
                                                href="javascript:" class="btn btn-danger btn-mini deleteRecord"
-                                               id="clickdelete">Delete</a>
+                                               id="clickdelete" title="delete product">Delete</a>
                                         </td>
 
                                     </tr>

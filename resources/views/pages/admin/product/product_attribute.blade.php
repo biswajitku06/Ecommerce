@@ -68,36 +68,44 @@
                             <h5>view Attribute List</h5>
                         </div>
                         <div class="widget-content nopadding">
-                            <table class="table table-bordered data-table">
-                                <thead>
-                                <tr>
-                                    <th>Attribute Id</th>
-                                    <th>SKU</th>
-                                    <th>Size</th>
-                                    <th>price</th>
-                                    <th>stock</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($products_details['attribute'] as $attributes)
-                                    <tr class="gradeU">
-                                        <td>{{$attributes->id}}</td>
-                                        <td>{{$attributes->sku}}</td>
-                                        <td>{{$attributes->size}}</td>
-                                        <td>{{$attributes->price}}</td>
-                                        <td>{{$attributes->stock}}</td>
-                                        <td>
-                                            <a rel="{{$attributes->id}}" rel1="delete-product_attribute"
-                                               href="javascript:" class="btn btn-danger btn-mini deleteRecord"
-                                               id="clickdelete">Delete</a>
-                                        </td>
-
+                            <form action="{{route('update_attributes',$products_details->id)}}" method="post">
+                                {{csrf_field()}}
+                                <table class="table table-bordered data-table">
+                                    <thead>
+                                    <tr>
+                                        <th>Attribute Id</th>
+                                        <th>SKU</th>
+                                        <th>Size</th>
+                                        <th>price</th>
+                                        <th>stock</th>
+                                        <th>Action</th>
                                     </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($products_details['attribute'] as $attributes)
+                                        <tr class="gradeU">
+                                            <input type="hidden" name="id[]" value="{{$attributes->id}}">
+                                            <td>{{$attributes->id}}</td>
+                                            <td>{{$attributes->sku}}</td>
+                                            <td>{{$attributes->size}}</td>
+                                            <td><input type="text" name="price[]" value="{{$attributes->price}}"></td>
+                                            <td><input type="text" name="stock[]" value="{{$attributes->stock}}"></td>
 
-                                @endforeach
-                                </tbody>
-                            </table>
+                                            <td>
+                                                <input type="submit" class="btn btn-mini btn-info" value="update">
+                                                <a rel="{{$attributes->id}}" rel1="delete-product_attribute"
+                                                   href="javascript:" class="btn btn-danger btn-mini deleteRecord"
+                                                   id="clickdelete">Delete</a>
+                                            </td>
+
+                                        </tr>
+
+                                    @endforeach
+                                    </tbody>
+                                </table>
+
+                            </form>
+
                         </div>
 
                     </div>

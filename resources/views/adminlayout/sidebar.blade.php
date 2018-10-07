@@ -14,6 +14,13 @@
             </ul>
         </li>
 
+        <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Coupon</span> <span class="label label-important">2</span></a>
+            <ul>
+                <li><a href="{{route('addCoupon')}}">Add Coupon</a></li>
+                <li><a href="{{route('viewCoupon')}}">View Coupon List</a></li>
+            </ul>
+        </li>
+
     </ul>
 </div>
 <!--sidebar-menu-->

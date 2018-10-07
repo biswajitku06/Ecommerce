@@ -96,6 +96,37 @@ $(document).ready(function(){
         }
     });
 
+//add coupon
+
+    $("#add_coupon").validate({
+        rules:{
+            coupon_code:{
+                required:true,
+                alphanumeric:true
+            },
+            amount:{
+                required:true,
+                number:true,
+            },
+            amount_type:{
+                required:true,
+            },
+            expiry_date:{
+                required:true,
+            }
+        },
+        errorClass: "help-inline",
+        errorElement: "span",
+        highlight:function(element, errorClass, validClass) {
+            $(element).parents('.control-group').addClass('error');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).parents('.control-group').removeClass('error');
+            $(element).parents('.control-group').addClass('success');
+        }
+    });
+
+
 //edit product
 
     $("#edit_product").validate({

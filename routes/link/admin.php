@@ -37,6 +37,15 @@ Route::group(['middleware'=>['auth']],function(){
     //products Attributes
     Route::match(['get','post'],'add-product-attribute/{id}','admin\ProductController@addProductAttribute')->name('addProductAttribute');
     Route::get('add-product-attribute/delete-product_attribute/{id}','admin\ProductController@deleteproductattribute');
+
+    Route::match(['get','post'],'add-product-image/{id}','admin\ProductController@addProductImage')->name('addProductimage');
+    Route::get('add-product-image/delete-product_image/{id}','admin\ProductController@deleteproductimage');
+    Route::post('update-attributes/{id}','admin\ProductController@updateAttributes')->name('update_attributes');
+
+    //coupon
+    Route::match(['get','post'],'add-coupon','user\CouponController@addCoupon')->name('addCoupon');
+    Route::match(['get','post'],'view-coupon','user\CouponController@viewCoupon')->name('viewCoupon');
+    Route::match(['get','post'],'edit-coupon/{id}','user\CouponController@editCoupon')->name('editCoupon');
 });
 
 

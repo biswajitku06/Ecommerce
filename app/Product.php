@@ -15,4 +15,9 @@ class Product extends Model
     {
        return $this->hasMany('App\Products_attributes','product_id');
     }
+
+    public function images()
+    {
+        return $this->hasMany('App\Product_Image','product_id');
+    }
 }

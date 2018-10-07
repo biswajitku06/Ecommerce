@@ -67,6 +67,14 @@
                                     </textarea>
                                 </div>
                             </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Material & Care</label>
+                                <div class="controls">
+                                    <textarea name="care" id="care" >{{$product_details->care}}
+                                    </textarea>
+                                </div>
+                            </div>
                             <div class="control-group">
                                 <label class="control-label">File upload input</label>
                                 <div class="controls">
@@ -76,6 +84,13 @@
                                         <img src="{{asset('images/backend_images/product/small/'.$product_details->image)}} "
                                              width="60" height="60"><a class="btn btn-danger" href="{{route('deleteimage',$product_details->id)}}">Delete</a>
                                     @endif
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Enable</label>
+                                <div class="controls" >
+                                    <input type="checkbox" name="status" id="status" value="2" @if($product_details->status==2) checked @endif/>
                                 </div>
                             </div>
                             <div class="form-actions">

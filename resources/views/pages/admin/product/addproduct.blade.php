@@ -66,10 +66,24 @@
                                     </textarea>
                                 </div>
                             </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Material & Care</label>
+                                <div class="controls">
+                                    <textarea name="care" id="care">
+                                    </textarea>
+                                </div>
+                            </div>
                             <div class="control-group">
                                 <label class="control-label">File upload input</label>
                                 <div class="controls">
                                     <input type="file" name="image" id="image" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Enable</label>
+                                <div class="controls" >
+                                   <input type="checkbox" name="status" id="status" value="2"/>
                                 </div>
                             </div>
                             <div class="form-actions">

@@ -9,6 +9,7 @@
 /*scroll to top*/
 
 $(document).ready(function(){
+	//alert("test");
 	$(function () {
 		$.scrollUp({
 	        scrollName: 'scrollUp', // Element ID
@@ -28,3 +29,84 @@ $(document).ready(function(){
 		});
 	});
 });
+
+$(document).ready(function(){
+
+	//change price with size
+	$('#selsize').change(function(){
+		var id=$(this).val();
+		if(id=="")
+			return false;
+		var my_url="http://localhost/Authentication/public"
+		$.ajax({
+			type:'get',
+			url:my_url+'/get-product-price',
+			datatype:'json',
+			data:{idvalue:id},
+			success:function(resp){
+                //console.log(resp);
+				$('#getprice').html("TAKA " +resp['price']);
+				$('#quantity').val(resp['stock']);
+
+				if(resp['stock']==0){
+					$('#cart').hide();
+					$('#availability').text('Out of Stock');
+				}else{
+
+                    $('#cart').show();
+                    $('#availability').text('In Stock');
+				}
+			},
+            error:function(){
+                alert("Error")
+            }
+
+		});
+	});
+
+});
+
+//change image
+
+
+$(document).ready(function(){
+    $('.changeimage').click(function(){
+    	var image=$(this).attr('src');
+    	$('.mainimage').attr('src',image);
+    });
+});
+
+//update price with item
+
+
+
+
+// Instantiate EasyZoom instances
+// var $easyzoom = $('.easyzoom').easyZoom();
+//
+// // Setup thumbnails example
+// var api1 = $easyzoom.filter('.easyzoom--with-thumbnails').data('easyZoom');
+//
+// $('.thumbnails').on('click', 'a', function(e) {
+//     var $this = $(this);
+//
+//     e.preventDefault();
+//
+//     // Use EasyZoom's `swap` method
+//     api1.swap($this.data('standard'), $this.attr('href'));
+// });
+//
+// // Setup toggles example
+// var api2 = $easyzoom.filter('.easyzoom--with-toggle').data('easyZoom');
+//
+// $('.toggle').on('click', function() {
+//     var $this = $(this);
+//
+//     if ($this.data("active") === true) {
+//         $this.text("Switch on").data("active", false);
+//         api2.teardown();
+//     } else {
+//         $this.text("Switch off").data("active", true);
+//         api2._init();
+//     }
+// });

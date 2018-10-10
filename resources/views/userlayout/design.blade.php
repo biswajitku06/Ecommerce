@@ -50,9 +50,9 @@
 
 @include('userlayout.footer')
 
+<script src="{{asset('js/frontend_js/jquery.js')}}"></script>
 <script src="{{asset('js/frontend_js/bootstrap.min.js')}}"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="{{asset('js/frontend_js/jquery.js')}}"></script>
 
 <script src="{{asset('js/frontend_js/jquery.scrollUp.min.js')}}"></script>
 <script src="{{asset('js/frontend_js/price-range.js')}}"></script>
@@ -63,6 +63,9 @@
 <script src="{{asset('js/frontend_js/jquery.ui.custom.js')}}"></script>
 
 <script src="{{asset('js/frontend_js/maruti.js')}}"></script>
+<script src="{{asset('js/frontend_js/jquery.validate.js')}}"></script>
+
+
 @yield('script')
 </body>
 </html>

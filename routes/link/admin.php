@@ -46,6 +46,14 @@ Route::group(['middleware'=>['auth']],function(){
     Route::match(['get','post'],'add-coupon','user\CouponController@addCoupon')->name('addCoupon');
     Route::match(['get','post'],'view-coupon','user\CouponController@viewCoupon')->name('viewCoupon');
     Route::match(['get','post'],'edit-coupon/{id}','user\CouponController@editCoupon')->name('editCoupon');
+    Route::get('delete-coupon/{id}','user\CouponController@deleteCoupon');
+
+    //Banner
+    Route::match(['get','post'],'add-banner','admin\BannerController@addBanner')->name('addBanner');
+    Route::match(['get','post'],'view-banner','admin\BannerController@viewBanner')->name('viewBanner');
+    Route::match(['get','post'],'edit-banner/{id}','admin\BannerController@editBanner')->name('editBanner');
+    Route::get('delete-banner/{id}','admin\BannerController@deleteBanner');
+    Route::get('delete-banner-image/{id}','admin\BannerController@deleteBannerImage')->name('delete-banner-image');
 });
 
 

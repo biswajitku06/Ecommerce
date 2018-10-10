@@ -102,7 +102,7 @@ $(document).ready(function(){
         rules:{
             coupon_code:{
                 required:true,
-                alphanumeric:true
+                alpha_num:true
             },
             amount:{
                 required:true,
@@ -126,6 +126,34 @@ $(document).ready(function(){
         }
     });
 
+    //edit coupon
+    $("#edit_coupon").validate({
+        rules:{
+            coupon_code:{
+                required:true,
+                alphanumeric:true
+            },
+            amount:{
+                required:true,
+                number:true,
+            },
+            amount_type:{
+                required:true,
+            },
+            expiry_date:{
+                required:true,
+            }
+        },
+        errorClass: "help-inline",
+        errorElement: "span",
+        highlight:function(element, errorClass, validClass) {
+            $(element).parents('.control-group').addClass('error');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).parents('.control-group').removeClass('error');
+            $(element).parents('.control-group').addClass('success');
+        }
+    });
 
 //edit product
 
@@ -159,6 +187,53 @@ $(document).ready(function(){
             $(element).parents('.control-group').addClass('success');
         }
     });
+
+//add-banner
+    $("#add_banner").validate({
+        rules:{
+            title:{
+                required:true,
+
+            },
+            link:{
+                required:true,
+            },
+
+        },
+        errorClass: "help-inline",
+        errorElement: "span",
+        highlight:function(element, errorClass, validClass) {
+            $(element).parents('.control-group').addClass('error');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).parents('.control-group').removeClass('error');
+            $(element).parents('.control-group').addClass('success');
+        }
+    });
+//Edit banner
+    $("#edit_banner").validate({
+        rules:{
+            title:{
+                required:true,
+
+            },
+            link:{
+                required:true,
+            },
+
+        },
+        errorClass: "help-inline",
+        errorElement: "span",
+        highlight:function(element, errorClass, validClass) {
+            $(element).parents('.control-group').addClass('error');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).parents('.control-group').removeClass('error');
+            $(element).parents('.control-group').addClass('success');
+        }
+    });
+
+
 //sweet alert for delete the image
     $('.deleteRecord').click(function(){
         var id=$(this).attr('rel')

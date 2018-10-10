@@ -28,7 +28,8 @@
                             <div class="control-group">
                                 <label class="control-label">Coupon Code</label>
                                 <div class="controls">
-                                    <input type="text" name="coupon_code" id="coupon_code" minlength="5" maxlength="15">
+                                    <input type="text" name="coupon_code" id="coupon_code"  minlength="5" maxlength="15">
+                                    <span>{{$errors->has('coupon_code') ? $errors->first('coupon_code'):' '}}</span>
                                 </div>
                             </div>
 
@@ -44,8 +45,8 @@
                                 <div class="controls">
                                     <select name="amount_type" style="width:220px" id="amount_type">
                                         <option>Select amount_type</option>
-                                        <option value="percentage">Percentage</option>
-                                        <option value="fixed">fixed</option>
+                                        <option value="Percentage">Percentage</option>
+                                        <option value="Fixed">Fixed</option>
                                     </select>
                                 </div>
                             </div>

@@ -27,16 +27,16 @@
                             <div class="control-group">
                                 <label class="control-label">Coupon Code</label>
                                 <div class="controls">
-                                    <input type="text" name="coupon_code" id="coupon_code"
+                                    <input type="text" name="coupon_code" id="coupon_code" required
                                            @if(isset($coupon)) value="{{$coupon->coupon_code}}" @endif minlength="5"
-                                           maxlength="15">
+                                           maxlength="15" >
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <label class="control-label">Amount</label>
                                 <div class="controls">
-                                    <input type="number" name="amount" min="1" id="amount"
+                                    <input type="number" name="amount" min="1" id="amount" required
                                            @if(isset($coupon)) value="{{$coupon->amount}}" @endif>
                                 </div>
                             </div>
@@ -44,14 +44,14 @@
                             <div class="control-group">
                                 <label class="control-label">Amount_type</label>
                                 <div class="controls">
-                                    <select name="amount_type" style="width:220px" id="amount_type">
+                                    <select name="amount_type" style="width:220px" id="amount_type" required>
                                         <option>Select amount_type</option>
 
-                                        <option value="percentage"
-                                                @if($coupon->amount_type=='percentage') selected @endif>Percentage
+                                        <option @if($coupon->amount_type=='Percentage') selected @endif value="Percentage"
+                                                >Percentage
                                         </option>
 
-                                        <option value="fixed" @if($coupon->amount_type=='fixed') selected @endif>Fixed
+                                        <option @if($coupon->amount_type=='Fixed') selected @endif value="Fixed" >Fixed
                                         </option>
 
                                     </select>
@@ -61,7 +61,7 @@
                             <div class="control-group">
                                 <label class="control-label">Expiry Date</label>
                                 <div class="controls">
-                                    <input type="text" name="expiry_date" id="expiry_date" autocomplete="off"
+                                    <input type="text" name="expiry_date" id="expiry_date" autocomplete="off" required
                                            @if(isset($coupon)) value="{{$coupon->expiry_date}}" @endif>
                                 </div>
                             </div>

@@ -25,7 +25,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php $total_price=0 ?>
+                    <?php $total_price = 0 ?>
                     @foreach($userCart as $cart)
                         <tr>
 
@@ -50,7 +50,7 @@
                                         <input class="cart_quantity_input" type="text" name="quantity" id="quantity"
                                                value="{{$cart->quantity}}" autocomplete="off" size="2">
                                     </div>
-                                        @if($cart->quantity > 1)
+                                    @if($cart->quantity > 1)
                                         <a class="cart_quantity_down"
                                            href="{{route('decrement-quantity',$cart->id)}}"> - </a>
                                     @endif
@@ -66,7 +66,7 @@
                             </td>
 
                         </tr>
-                        <?php $total_price=$total_price+($cart->price*$cart->quantity); ?>
+                        <?php $total_price = $total_price + ($cart->price * $cart->quantity); ?>
                     @endforeach
 
                     </tbody>
@@ -79,71 +79,35 @@
         <div class="container">
             <div class="heading">
                 <h3>What would you like to do next?</h3>
-                <p>Choose if you have a discount code or reward points you want to use or would like to estimate your
-                    delivery cost.</p>
+                <p>Choose if you have a Coupon code you want to use.</p>
             </div>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="chose_area">
                         <ul class="user_option">
                             <li>
-                                <input type="checkbox">
-                                <label>Use Coupon Code</label>
-                            </li>
-                            <li>
-                                <input type="checkbox">
-                                <label>Use Gift Voucher</label>
-                            </li>
-                            <li>
-                                <input type="checkbox">
-                                <label>Estimate Shipping & Taxes</label>
-                            </li>
-                        </ul>
-                        <ul class="user_info">
-                            <li class="single_field">
-                                <label>Country:</label>
-                                <select>
-                                    <option>United States</option>
-                                    <option>Bangladesh</option>
-                                    <option>UK</option>
-                                    <option>India</option>
-                                    <option>Pakistan</option>
-                                    <option>Ucrane</option>
-                                    <option>Canada</option>
-                                    <option>Dubai</option>
-                                </select>
+                                <form method="post" action="{{route('coupon-apply')}}">
+                                    {{csrf_field()}}
+                                    <label>Coupon Code</label>
+                                    <input type="text" name="coupon_code">
+                                    <input type="submit" value="apply" class="btn btn-default">
+                                </form>
 
                             </li>
-                            <li class="single_field">
-                                <label>Region / State:</label>
-                                <select>
-                                    <option>Select</option>
-                                    <option>Dhaka</option>
-                                    <option>London</option>
-                                    <option>Dillih</option>
-                                    <option>Lahore</option>
-                                    <option>Alaska</option>
-                                    <option>Canada</option>
-                                    <option>Dubai</option>
-                                </select>
-
-                            </li>
-                            <li class="single_field zip-field">
-                                <label>Zip Code:</label>
-                                <input type="text">
-                            </li>
                         </ul>
-                        <a class="btn btn-default update" href="">Get Quotes</a>
-                        <a class="btn btn-default check_out" href="">Continue</a>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="total_area">
                         <ul>
-                            <li>Cart Sub Total <span>$59</span></li>
-                            <li>Eco Tax <span>$2</span></li>
-                            <li>Shipping Cost <span>Free</span></li>
-                            <li>Total Taka : <span><?php echo $total_price?></span></li>
+                            @if(!empty(Session::get('couponamount')))
+                                <li>sub Total : <span><?php echo $total_price?></span></li>
+                                <li>Coupon Discount : <span><?php echo Session::get('couponamount');?></span></li>
+                                <li>Grand Total : <span><?php echo $total_price - Session::get('couponamount')?></span>
+                                </li>
+                            @else
+                                <li>sub Total : <span><?php echo $total_price?></span></li>
+                            @endif
                         </ul>
                         <a class="btn btn-default update" href="">Update</a>
                         <a class="btn btn-default check_out" href="">Check Out</a>
@@ -159,20 +123,20 @@
 
 @section('script')
     <script>
-        function myFunction(){
-            var id=$('#id').val();
-            my_url="http://localhost/Authentication/public/";
+        function myFunction() {
+            var id = $('#id').val();
+            my_url = "http://localhost/Authentication/public/";
             $.ajax({
-                type:'get',
-                datatype:'json',
+                type: 'get',
+                datatype: 'json',
                 //data:{id:id},
-                url:my_url+'update-price/'+id,
-                success:function (resp) {
-                    var price=resp['price'];
-                    var quantity=$('#quantity').val();
-                    var totalprice =price*quantity;
+                url: my_url + 'update-price/' + id,
+                success: function (resp) {
+                    var price = resp['price'];
+                    var quantity = $('#quantity').val();
+                    var totalprice = price * quantity;
                     $('#totalprice').text(totalprice);
-                },error:function () {
+                }, error: function () {
                     alert(error);
                 }
             });
@@ -180,9 +144,9 @@
     </script>
 
 
-{{--for message showing--}}
+    {{--for message showing--}}
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $("#showmessage").delay(5000).slideUp(300);
         });
     </script>

@@ -110,3 +110,68 @@ $(document).ready(function(){
 //         api2._init();
 //     }
 // });
+
+$(document).ready(function(){
+	//alert('test')
+	$('#registerForm').validate({
+		rules:{
+			name:{
+				required:true,
+				minlength:2,
+				accept:"[a-zA-Z]+"
+			},
+			password:{
+				required:true,
+				minlength:6
+			},
+			email:{
+				required:true,
+				email:true,
+				remote:'check_email'
+
+			}
+		},
+		messages:{
+			name:{
+				required:"please enter your name",
+				minlength:"Name at least 2 character",
+				accept:"Must be contain only letter"
+			},
+			password:{
+				required:"Please Enter your password",
+				minlength:"Password at lest 6 characters",
+			},
+			email:{
+				required:"please Enter your Email",
+				email:"Must be a Email",
+				remote:"Email already Exists!"
+			}
+		},
+
+	})
+})
+
+
+$(document).ready(function(){
+	$('#loginForm').validate({
+		rules:{
+			password:{
+				required:true,
+			},
+			email:{
+				required:true,
+				email:true
+			}
+		},
+		messages:{
+			password:{
+				required:"please Enter your Password"
+			},
+			email:{
+				required:"please Enter your email",
+				email:"Must be a email"
+			},
+		}
+	});
+});
+

@@ -11,6 +11,7 @@ use App\Product_Image;
 use App\Cart;
 use Illuminate\Support\Facades\Session;
 use DB;
+use App\Coupon;
 
 class HomeController extends Controller
 {
@@ -84,6 +85,9 @@ class HomeController extends Controller
 
     public function addToCart(Request $request)
     {
+        Session::forget('couponamount');
+        Session::forget('couponcode');
+
         if($request->isMethod('post')){
             $data=$request->all();
             if(empty($request->user_email)){
@@ -129,6 +133,9 @@ class HomeController extends Controller
     }
 
     public function deleteItem($id){
+
+        Session::forget('couponamount');
+        Session::forget('couponcode');
         if(isset($id) && is_numeric($id)){
             $deleteitem=Cart::where('id',$id)->delete();
             if($deleteitem){
@@ -139,6 +146,8 @@ class HomeController extends Controller
 
     public function incrementQuantity($id=null)
     {
+        Session::forget('couponamount');
+        Session::forget('couponcode');
         if (isset($id) && is_numeric($id)) {
             $cartdetails = Cart::where('id', $id)->first();
             $proattdet = Products_attributes::where(['product_id' => $cartdetails->product_id, 'size' => $cartdetails->size])->first();
@@ -154,6 +163,9 @@ class HomeController extends Controller
 
 
     public function decrementQuantity($id=null){
+
+        Session::forget('couponamount');
+        Session::forget('couponcode');
         if(isset($id) && is_numeric($id)){
             $updateQunatity=Cart::where('id',$id)->increment('quantity',-1);
             if($updateQunatity){
@@ -167,6 +179,47 @@ class HomeController extends Controller
         //$data=$request->all();
         $item=Cart::where('id',$id)->first();
         return response()->json($item);
+    }
+
+    public function applyCoupon(Request $request){
+        Session::forget('couponamount');
+        Session::forget('couponcode');
+
+        if($request->isMethod('post')){
+            $couponcount=Coupon::where('coupon_code',$request->coupon_code)->count();
+            if($couponcount==0)
+                return redirect('cart')->with(['dismiss'=>'Coupon is invalid']);
+            else{
+                $coupondetails=Coupon::where('coupon_code',$request->coupon_code)->first();
+                if($coupondetails->status==0){
+                    return redirect('cart')->with(['dismiss'=>'Coupon is Inactive']);
+                }
+                $currentdate=date('Y-m-d');
+
+                if($coupondetails->expiry_date < $currentdate){
+                    return redirect('cart')->with(['dismiss'=>'Coupon date is Expired']);
+                }
+
+                $session_id=Session::get('session_id');
+                $cartDeatails=Cart::where(['session_id'=>$session_id])->get();
+                $total_amount=0;
+                foreach($cartDeatails as $item){
+                    $total_amount=$total_amount+($item->price * $item->quantity);
+                }
+
+                if($coupondetails->amount_type=='Percentage'){
+                    $couponamount=$total_amount*($coupondetails->amount /100);
+                }
+                else
+                    $couponamount=$coupondetails->amount;
+
+                Session::put('couponamount',$couponamount);
+                Session::put('couponcode',$request->coupon_code);
+
+                return redirect('cart')->with(['success'=>'Coupon code successfully applied.you are availing discount!!']);
+
+            }
+        }
     }
 
 }

@@ -78,7 +78,7 @@ $maincategories = Controller::categories();
                                 <li><a href="{{route('login-register')}}"><i class="fa fa-lock"></i> Login</a></li>
                             @else
                                 <li><a href="{{route('logout')}}"><i class="fa fa-signout"></i> Logout</a></li>
-                                {{--<li><a href="{{route('login-register')}}"><i class="fa fa-lock"></i> Account</a></li>--}}
+                                <li><a href="{{route('account')}}"><i class="fa fa-lock"></i> Account</a></li>
                             @endif
 
                         </ul>

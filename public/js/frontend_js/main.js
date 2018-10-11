@@ -175,3 +175,118 @@ $(document).ready(function(){
 	});
 });
 
+
+$(document).ready(function(){
+    $('#accountForm').validate({
+        rules:{
+            address:{
+                required:true,
+            },
+            city:{
+                required:true,
+            },
+            state:{
+                required:true,
+            },
+            country:{
+                required:true,
+
+            },
+            pincode:{
+                required:true,
+            },
+            mobile:{
+                required:true,
+
+            }
+        },
+        messages:{
+            address:{
+                required:"Please enter the address"
+            },
+            city:{
+                required:"Please enter the city",
+            },
+            state:{
+                required:"Please enter the state",
+            },
+            country:{
+                required:"Please enter the country",
+
+            },
+            pincode:{
+                required:"Please enter the pincode",
+            },
+            mobile:{
+                required:"Please enter the mobile",
+
+            }
+        }
+    });
+});
+
+
+$(document).ready(function(){
+    $('#updatepasswordForm').validate({
+        rules:{
+            currentpassword:{
+                required:true,
+                minlength:6,
+                maxlength:15
+            },
+            newpassword:{
+                required:true,
+                minlength:6,
+				maxlength:15
+            },
+            confirmpassword:{
+                required:true,
+                minlength:6,
+                maxlength:15,
+                equalTo:"#newpassword"
+            },
+
+        },
+        messages:{
+            currentpassword:{
+                required:"Please enter the current password",
+                minlength:"Password at least 6 characters",
+				maxlength:"Password maximum length at most 15"
+            },
+            newpassword:{
+                required:"Please enter the new password",
+                minlength:"Password at least 6 characters",
+                maxlength:"Password maximum length at most 15"
+            },
+            confirmpassword:{
+                required:"Please enter the confirm password",
+                minlength:"Password at least 6 characters",
+                maxlength:"Password maximum length at most 15",
+                equalTo:"confirm password is not same "
+            },
+
+        }
+    });
+});
+
+
+$(document).ready(function(){
+	$('#currentpassword').keyup(function(){
+		var currentpassword=$(this).val();
+		my_url="http://localhost/Authentication/public/"
+		$.ajax({
+			type:'get',
+			datatype:'json',
+			url:my_url+'check-password',
+			data:{cpass:currentpassword},
+			success:function(resp){
+                if(resp=="false")
+                    $('#chkpwd').html("<font color:red>Current Password is incorrect</font>")
+                else if(resp=="true")
+                    $('#chkpwd').html("<font color:green>Current Password is correct</font>")
+			}
+		})
+
+	});
+});
+

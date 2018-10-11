@@ -19,5 +19,7 @@ Route::get('logout','user\UserController@logout')->name('logout');
 Route::post('login','user\UserController@login')->name('login');
 
 Route::group(['middleware'=>['frontlogin']],function(){
-    Route::match(['get','post'],'account','user\UserController@account')->name('account');
+    Route::match(['get','post'],'account','user\UserController@updateaccount')->name('account');
+    Route::post('update-password','user\UserController@updatePassword')->name('update-password');
+    Route::get('check-password','user\UserController@checkPassword');
 });
